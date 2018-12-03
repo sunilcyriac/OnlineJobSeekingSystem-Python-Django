@@ -1,0 +1,161 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container">
+
+
+
+              <div class="text-center">
+
+                {% if messages %}
+
+                      {% for message in messages %}
+
+                         <h3 style="color: red; margin-top: 30px"> {{ message }}</h3>
+
+                      {% endfor %}
+
+                {%  endif %}
+
+            </div>
+
+    {%  if form %}
+
+    <div class="text-center" style="margin-top: 20px">
+        <h2> EDIT JOB </h2>
+    </div>
+
+    {% endif %}
+
+
+
+    <div class="form-group" >
+
+
+
+
+    <form method="post" id="jobform"  data-subcategory-url="{% url 'subcategory'  %}" >
+
+        {% csrf_token %}
+
+    <div>
+
+        {%  for  field in form %}
+            <!--<label> {{ field.label }}</label>-->
+            {% if field.label == 'ad_choices' %}
+
+                <p style="margin-top: 30px;" >Advertise Job Now</p>
+                <select name="job_ad_flag" style="display: block; margin-top: 10px;background-color: #1a1a1a; color: #3ca861">
+
+                {% for key,value in form.fields.job_ad_flag.choices %}
+
+
+
+                    <option class="option-values"
+                            value="{{  key }}"{% if field.value == key %}selected {% endif  %}>{{ value }}</option>
+
+
+                {% endfor %}
+
+                </select>
+
+
+                {% elif field.label == "Deadline" %}
+
+
+                <label for="{{ field.name }}" style="margin-top: 30px; margin-bottom: -40px">
+                    {{ field.label }} </label>
+                <input id="deadline" name="{{ field.name }}" class="form-control "
+                       style="background-color: #1a1a1a; color: #ffffff"
+                value="{{field.value.year}}-{{field.value.month}}-{{field.value.day}}">
+                 </input>
+
+
+                {%  elif field.label == "Job description" %}
+
+                <label for="{{ field.name }}" style= "margin-top: 30px; margin-bottom: -40px">
+                {{ field.label}}
+                </label>
+                <textarea name="{{ field.name }}" class="form-control"
+                           style="background-color: #1a1a1a;
+                           color: #ffffff">{{field.value}}</textarea>
+
+
+                 </select>
+
+                {% elif field.label == 'Category' %}
+
+                    <label for="id_category" style="margin-top: 20px"> Job Category </label>
+                    <select name="category" id="id_category" style="display: block; margin-top: 10px;background-color: #1a1a1a; color: #3ca861">
+
+                    {% for key,value in form.fields.category.choices %}
+
+
+                    <option class="option-values"
+                            value="{{  key }}"{% if field.value == key %} selected {% endif  %}>{{ value }}</option>
+
+
+                    {% endfor %}
+
+                    </select>
+
+
+
+                {% elif field.label == 'Sub category' %}
+
+
+                    <label for="id_sub_category" style="margin-top: 20px"> Sub Category </label>
+                    <select name="sub_category" id="id_sub_category" style="display:
+                     block; margin-top: 10px;background-color: #1a1a1a; color: #3ca861">
+
+
+
+                    <option class="option-values"
+                            value="">{{ field.value }}</option>
+
+                    </select>
+
+
+
+            {% else %}
+                <label for="{{ field.name }}" style="margin-top: 30px; margin-bottom: -40px">
+                    {{ field.label }} </label>
+                <input  name="{{ field.name }}" class="form-control "
+                        value="{% if field.value %} {{field.value}}{% endif %}"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                 </input>
+            {% endif %}
+            {{ field.errors }}
+            {% endfor %}
+
+
+
+    </div>
+
+
+    {% if form %}
+
+
+    <div class="create-job-button text-center" style="margin-top: 25px">
+
+
+             <button type="submit" class="btn btn-success" style="width: 150px"> Save Job </button>
+             <button type="reset" class="btn btn-danger" style="width: 150px"> Cancel </button>
+
+
+    </div>
+
+    {% endif %}
+
+
+    </form>
+
+         </div>
+
+    </div>
+
+
+
+{% endblock %}

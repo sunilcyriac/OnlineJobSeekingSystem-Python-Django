@@ -1,0 +1,75 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container">
+
+    <div class="text-center" style="margin-top: 30px">
+
+        <h2> UPDATE PROFILE </h2>
+
+    </div>
+
+
+
+    <div class = "profile-form">
+
+        <div class="form-group">
+
+    <form method="POST">
+        {% csrf_token %}
+
+
+        {%  for  field in form %}
+            <!--<label> {{ field.label }}</label>-->
+            {% if field.label == 'Gender' %}
+
+                <p style="margin-top: 30px;" >{{ field.label }}</p>
+                <select name="Gender" style="display: block; margin-top: 10px;background-color: #1a1a1a; color: #3ca861">
+
+                {% for key,value in form.fields.gender.choices %}
+
+
+                    <option value="{{  key }}">{{ value }}</option>
+
+
+                {% endfor %}
+
+                </select>
+
+            {% else %}
+                <label for="{{ field.name }}" style="margin-top: 30px; margin-bottom: -40px">
+                    {{ field.label }} </label>
+                <input placeholder="{{ field.label }}" name="{{ field.name }}" class="form-control"
+                       style="background-color: #1a1a1a; color: #ffffff" value="
+                       {%  if field.value == None %} {% else %}  {{  field.value}} {% endif %}">
+                 </input>
+            {% endif %}
+            {{ field.errors }}
+            {% endfor %}
+
+
+
+        <br/>
+
+        <div class="text-center">
+
+            <button type="submit" class="btn btn-success"> Update Profile </button>
+
+        </div>
+
+    </form>
+
+         </div>
+
+    </div>
+
+
+    </div>
+
+
+
+
+
+{% endblock %}

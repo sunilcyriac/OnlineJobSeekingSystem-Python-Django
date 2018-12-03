@@ -1,0 +1,14 @@
+{%  extends "base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <a href="{%  url 'index' %}"> <button class="btn btn-dark"> Back </button> </a>
+
+    <h2>  {{ entries.name }} </h2>
+    <h3> {{ entries.date }}</h3>
+
+
+</div>
+
+{%  endblock content %}

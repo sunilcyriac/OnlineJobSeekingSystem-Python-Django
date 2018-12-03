@@ -1,0 +1,106 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container">
+
+    <div class="text-center" style="margin-top: 30px">
+
+        <h2 class="profile-header" id="profile-heading">PROFILE</h2>
+
+    </div>
+
+
+
+
+
+    <div class = "profile-form">
+
+        <div class="form-group">
+
+
+
+
+    <form method="post" id="profile-edit">
+        {% csrf_token %}
+
+    <div class="profile-edit-buttons"> <!-- buttons -->
+
+        <button type="reset" id="profileResetButton" style="display: none"
+                    onclick="resetButton()" class="btn btn-danger"> Cancel  </button>
+
+        <button type="submit" id="profileEditButton"
+                    onclick="toggleProfileEdit()" class="btn btn-success"> Edit Profile </button>
+
+
+
+
+
+    </div>
+
+    <div class="text-center" >
+
+
+
+        </div>
+
+
+        {%  for  field in form %}
+            <!--<label> {{ field.label }}</label>-->
+            {% if field.label == 'Gender' %}
+
+                <p style="margin-top: 30px;" >{{ field.label }}</p>
+                <select name="gender" style="display: block; margin-top: 10px;background-color: #1a1a1a; color: #3ca861">
+
+                {% for key,value in form.fields.gender.choices %}
+
+
+
+                    <option class="option-values"
+                            value="{{  key }}"{% if field.value == key %}selected {% endif  %}>{{ value }}</option>
+
+
+                {% endfor %}
+
+                </select>
+
+                {% elif field.label == 'Birthdate' %}
+
+                <label for="{{ field.name }}" style="margin-top: 30px; margin-bottom: -40px">
+                    {{ field.label }} </label>
+                <input id ='datepicker' onclick="removeVal()" readonly placeholder="{{ field.label }}"
+                       name="{{ field.name }}" class="form-control input-control date-picking"
+                       style="background-color: #1a1a1a; color: #ffffff"
+                       value="{{field.value.year}}-{{field.value.month}}-{{field.value.day}}">
+
+            {% else %}
+                <label for="{{ field.name }}" style="margin-top: 30px; margin-bottom: -40px">
+                    {{ field.label }} </label>
+                <input readonly name="{{ field.name }}" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff" value="{{ field.value}}">
+                 </input>
+            {% endif %}
+            {{ field.errors }}
+            {% endfor %}
+
+
+
+        <br/>
+
+
+
+    </form>
+
+         </div>
+
+    </div>
+
+
+    </div>
+
+
+
+
+
+{% endblock %}

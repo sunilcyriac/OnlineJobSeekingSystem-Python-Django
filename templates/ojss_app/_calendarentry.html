@@ -1,0 +1,13 @@
+
+
+            <div class="calendar_entry col-lg-4">
+
+                <h2> {{ entry.name }}</h2>
+                <h4> {{  entry.date }}</h4>
+                <p> {{ entry.desc }} </p>
+                <a href="{%  url 'details' entry.id %}" <button class="btn btn-primary"> View Details </button> </a>
+                <button data-id="{{ entry.id }}" data-token="{{ csrf_token }}" onclick="deleteCalendarEntry(this)"   class="btn btn-danger">Delete</button>
+            </div>
+
+
+

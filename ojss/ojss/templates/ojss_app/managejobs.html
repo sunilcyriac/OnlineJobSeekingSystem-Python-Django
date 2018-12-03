@@ -1,0 +1,148 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+
+
+    <div class="container">
+
+
+
+        <div class="add-job text-center">
+
+            <a class="text-center" href="{% url 'add_job' %}">
+
+                <button class="btn btn-info text-center" style="width: 300px; margin-top: 30px">  Add New Job </button>
+            </a>
+
+        </div>
+
+
+        <div>
+
+                {% if messages %}
+
+                      {% for message in messages %}
+
+                         <p style="color: red; margin-top: 30px"> {{ message }}</p>
+
+                      {% endfor %}
+
+                {%  endif %}
+
+            </div>
+
+
+        </div >
+
+
+
+
+    <div class="container">
+
+
+        <div class="text-center" style="margin-top: 40px">
+
+
+
+            {% if jobs %}
+
+                <h2 > Created Jobs </h2>
+
+                <table class="table table-dark table-striped">
+                      <thead>
+                        <tr>
+                             <th scope="col">#</th>
+                             <th scope="col">Job Role</th>
+                             <th scope="col">Job Description</th>
+                             <th scope="col">Remuneration</th>
+                             <th scope="col">Posted Date</th>
+                             <th scope="col">Deadline</th>
+                             <th scope="col"> Advertised (Yes/No)</th>
+                             <th scope="col"></th>
+                        </tr>
+                      </thead>
+                        <tbody>
+
+
+                {%  for item in jobs %}
+
+                    {% if item.job_ad_flag == 'Y' or item.job_ad_flag == 'y' %}
+
+
+                        <tr>
+
+                          <th scope="row">{{ forloop.counter }}</th>
+                             <td>{{ item.job_role }}</td>
+                             <td>{{ item.job_description }}</td>
+                             <td>{{ item.remuneration }}</td>
+                             <td>{{ item.posted_date }}</td>
+                             <td>{{ item.deadline }}</td>
+                             <td>{{ item.job_ad_flag }}</td>
+                            <td>
+                                <a href="{% url 'applications' item.id  %}">
+                                    <button  class="btn-sm btn-info"> VIEW APPLICATIONS
+                                </button></a>
+                            </td>
+                            <td>
+                                <a href="{% url 'job_edit' item.id  %}"> <button  class="btn-sm btn-warning"> EDIT JOB
+                            </button> </a></td>
+
+                        </tr>
+
+                    {% endif %}
+
+
+
+                {% endfor %}
+
+                        {%  for item in jobs %}
+
+                    {% if item.job_ad_flag == 'N' or item.job_ad_flag == 'n' %}
+
+
+                        <tr style="background-color: #d9534f">
+
+                          <th scope="row">{{ forloop.counter }}</th>
+                             <td>{{ item.job_role }}</td>
+                             <td>{{ item.job_description }}</td>
+                             <td>{{ item.remuneration }}</td>
+                             <td>{{ item.posted_date }}</td>
+                             <td>{{ item.deadline }}</td>
+                             <td>{{ item.job_ad_flag }}</td>
+                            <td>
+                                <a href="{% url 'applications' item.id  %}">
+                                    <button  class="btn-sm btn-info"> VIEW APPLICATIONS
+                                </button></a>
+                            </td>
+                            <td>
+                                <a href="{% url 'job_edit' item.id  %}"> <button  class="btn-sm btn-warning"> EDIT JOB
+                            </button> </a></td>
+
+                        </tr>
+
+                    {% endif %}
+
+
+
+                {% endfor %}
+
+
+                </tbody>
+                </table>
+
+            {% else %}
+
+                <h6 style="margin-top: 100px;color: #c9302c" > You have not created any jobs </h6>
+
+             {% endif %}
+
+        </div>
+
+
+    </div>
+
+
+
+
+{%  endblock %}

@@ -1,0 +1,162 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+
+    <div class="text-center" style="border: none; width: auto">
+
+                {% if messages %}
+
+                      {% for message in messages %}
+
+
+                         <h4 style="color: red; margin-top: 30px"> {{ message }}</h4>
+
+
+
+                      {% endfor %}
+
+                {%  endif %}
+
+            </div>
+
+
+    <div class="row application-toggler" style="display: none">
+
+        {% if form %}
+        <div class="col-md-12 text-center" style="margin-bottom: 20px;">
+
+            <h2> JOB APPLICATION FORM  </h2>
+            <form method="post" action = {% url 'apply' job.id %} >
+            {%  csrf_token %}
+            {% for field in form %}
+                <div style="margin-top: 20px">
+
+                     <label for="{{ field.name }}">{{ field.label }}</label>
+                     <textarea class="form-control" placeholder="{{ field.name }}"
+                     style="background-color: #1a1a1a; color: #ffffff" name="{{ field.name }}"></textarea>
+
+                </div>
+
+
+            {% endfor %}
+
+            <button class="btn btn-success" type="submit" style="margin-top: 20px"> APPLY </button>
+
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+    {% if job %}
+
+    <div class="job_details" style="margin-top: 20px">
+
+
+        <div class="row">
+        <div class="col-md-12">
+
+            <h2 id="job_name"> {{ job.job_role }} </h2>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <h4 id="job_organization"> Organization : {{ job.organization }}</h4>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <h6 id="job_location">  Location : {{ job.location }} </h6>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+             <h6 id="job_renumeration"> Renumeration : {{ job.remuneration }} </h6>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+             <h6 id="skill_required"> Required Skills &nbsp : &nbsp&nbsp
+              {{ job.skill_required_1 }} &nbsp
+            {{ job.skill_required_2 }}
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+             <h6 id="skill_required"> Desirable Skills &nbsp : &nbsp&nbsp
+             {% if job.skill_required_3 %} {{ job.skill_required_3 }} {% endif %}&nbsp&nbsp
+            {% if job.skill_required_4 %} {{ job.skill_required_4 }} {% endif %} &nbsp&nbsp
+                 {% if job.skill_required_5 %} {{ job.skill_required_5 }} {% endif %}</h6>
+
+        </div>
+
+    </div>
+
+
+        <div class="border-job-details"> </div>
+
+
+        <div class="text-center">
+
+            {% if request.user.is_seeker and status == 'T' %}
+            <button class="btn bg-info apply-button text-center" id="applyButton"
+                    onclick="applicationViewer()" style="margin-top: 20px"> Apply </button>
+
+                {% else %}
+                <h5 style="margin-top: 30px; color: #d9534f"> You have already applied for this job </h5>
+            {% endif %}
+        </div>
+
+
+
+
+    <div class="row ">
+
+        <div class="col-md-12 description_detailed">
+
+            <p> {{ job.job_description }}</p>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    </div>
+
+    {% endif %}
+
+    </div>
+
+
+{%  endblock content %}

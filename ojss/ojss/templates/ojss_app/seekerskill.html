@@ -1,0 +1,90 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+
+
+         <div class="text-center" style="margin-top: 30px">
+
+             <h2 class="skill-header" id="skill-heading">SKILL</h2>
+
+         </div>
+
+
+
+
+
+
+        <div class="form-group">
+
+             <form method="post" id="skill-form">
+                 {% csrf_token %}
+
+                 <div class="skill-edit-buttons"> <!-- buttons -->
+
+                         <button type="reset" id="skill-reset" style="display: none"
+                             onclick="resetSkill()" class="btn btn-danger"> Cancel  </button>
+
+                         <button type="submit" id="skill-submit"
+                             onclick="toggleSkillEdit()" class="btn btn-success"> Edit Skill </button>
+
+                   </div>
+
+
+             <div>
+
+                {% if messages %}
+
+                      {% for message in messages %}
+
+                         <p style="color: red; margin-top: 30px"> {{ message }}</p>
+
+                      {% endfor %}
+
+                {%  endif %}
+
+            </div>
+
+
+
+                 <div>
+
+                    <div class="row">
+
+
+                        {% for field in form %}
+
+                            <div class="col-md-4 skill-group">
+
+
+                                <label for="{{ field.name }}" >{{ field.label }} </label>
+                                <input readonly name="{{ field.name }}" class="form-control skill-input-control"
+                                     style="background-color: #1a1a1a; color: #ffffff" value="{{ field.value}}">
+                                {{ field.errors }}
+
+                            </div>
+
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+
+
+                 </div>
+
+
+
+             </form>
+         </div>
+    </div>
+
+
+
+
+
+
+{%  endblock %}

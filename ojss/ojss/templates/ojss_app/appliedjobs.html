@@ -1,0 +1,86 @@
+{%  extends "base.html" %}
+
+
+{% block content %}
+
+
+    <div class="container">
+
+
+        <div class="text-center" style="margin-top: 40px">
+
+
+
+            {% if applications %}
+
+                <h2 > Applied Jobs </h2>
+
+                <table class="table table-dark table-striped">
+                      <thead>
+                        <tr>
+                             <th scope="col">#</th>
+                             <th scope="col">Application Id</th>
+                             <th scope="col">Your Score</th>
+                             <th scope="col">Applied date</th>
+                             <th scope="col">Status</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+
+
+                        {%  for item in applications %}
+
+
+
+                        {%  if item.status == 'A' %}
+                        <tr style="background-color: #3ca861">
+                        {% elif item.status == 'I' %}
+                            <tr style="background-color: #1a82ae">
+                            {% elif item.status == 'R' %}
+                                <tr style="background-color: #d9534f">
+                                {% else %}
+                                    <tr style="background-color: #573e1c">
+                                    {% endif %}
+
+
+                          <th scope="row">{{ forloop.counter }}</th>
+                             <td>{{ item.id }}</td>
+                             <td>{{ item.matching_score }}</td>
+                             <td>{{ item.date }}</td>
+                             {% if item.status == 'R' %}
+                                 <td> Application rejected </td>
+                             {% elif item.status == "A" %}
+                                 <td>Application sent</td>
+                                 {% elif item.status == "I" %}
+                                 <td>Selected for interview</td>
+                                 {% else %}<td> Selected for next round</td>
+                             {% endif %}
+
+                        </tr>
+
+
+
+
+
+                {% endfor %}
+
+
+                </tbody>
+                </table>
+
+            {% else %}
+
+                <h6 style="margin-top: 100px;color: #c9302c" > You have not applied for any jobs </h6>
+
+             {% endif %}
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+{%  endblock %}

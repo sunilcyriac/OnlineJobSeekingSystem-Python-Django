@@ -1,0 +1,244 @@
+
+html{
+    height: 100%;
+    width: 100%;
+}
+
+
+/* Body transformations */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+}
+
+/* Draws the line after navigation */
+.border {
+    border-bottom: #3ca861;
+}
+
+
+/* Styling labels above the search box */
+.label {
+    border-style: none;
+    font-size: larger;
+    text-transform: uppercase   ;
+}
+
+/* Styling navbar */
+.navbar-item {
+    margin-right: 30px;
+    position: relative;
+}
+
+.navbar-item:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.navbar-item:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+
+
+#messages{
+
+    width: 100%;
+    background-color: #3ca861;
+}
+
+
+
+
+
+.search-bar{
+
+    margin-top: -35px;
+}
+
+
+/* Styling individual job listing in search */
+.job_list {
+    color: #adb5bd;
+    overflow: hidden;
+    padding: 20px;
+    border-style: inset;
+    border-color: #ffffff;
+    background-color: #0d0d0d;
+    margin-top: 10px;
+
+}
+
+
+/* border in induvidual job listing */
+.border-job {
+    border-bottom: #ffffff;
+    border-style: inset;
+
+}
+
+
+/* hover styling for individual job listing */
+
+.job_list:hover .border-job {
+
+    border-color: #bf2e29;
+    transition: border-color ease-in .4s;
+
+}
+
+
+
+.job_list h1, h2, h3, h4, h5, h6 {
+
+    color: #a9e0bc;
+}
+
+.job_list p {
+    padding-top: 20px;
+}
+
+
+
+/* centering elements on a page */
+.page-center {
+    width: 600px;
+    margin: 110px auto;
+    border-style: ridge;
+    border-color: #e9edde;
+    padding : 20px;
+    border-width: thin;
+}
+
+
+/* styling form input boxes */
+input {
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+
+/* Job details page styling */
+
+
+/* job detail page items  */
+
+.job_details {
+
+    padding: 20px;
+    clear: both;
+    overflow: hidden;
+    background-color: #0d0d0d;
+
+}
+
+
+
+#job_name,#job_location, #job_organization, #job_renumeration {
+
+
+    padding: 5px;
+
+}
+
+
+
+.border-job-details {
+
+    overflow: auto;
+    padding: 2px;
+    border-color: #919aa1;
+    background-color: #0d0d0d;
+    border-style: groove;
+
+}
+
+.job_details p {
+
+    padding-top: 20px;
+}
+
+.login-button{
+    padding: 5px;
+}
+
+/* Logo Div Placement */
+.logo{
+    margin-top: 40px;
+}
+
+/* logo text */
+.logo-text{
+    color: #f0ad4e;
+}
+
+/* Login text such as signup and login */
+.login-text {
+    color: #4BBF73;
+}
+
+
+.profile-form{
+
+    width: 70%;
+    margin: 0 auto;
+
+}
+
+
+
+.profile-form-style{
+
+    width: 400px;
+    height: 30px;
+    margin-left: 30px;
+
+}
+
+
+.profile-edit-buttons{
+
+    margin-top: 20px;
+    margin-left: 500px;
+}
+
+
+
+.skill-edit-buttons{
+
+    margin-top: 20px;
+}
+
+
+.skill-group {
+
+    margin-top: 20px;
+}
+
+
+/* date pciker */
+
+.ui-datepicker {
+    font-size: 20px;
+    width: 200px;
+    background: #bf2e29;
+    border: 1px solid #555;
+    color: #EEE;
+    cursor: pointer;
+ }
+
+
+

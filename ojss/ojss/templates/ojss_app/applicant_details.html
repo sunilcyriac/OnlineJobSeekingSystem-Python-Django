@@ -1,0 +1,245 @@
+{%  extends "base.html" %}
+
+{% block content %}
+
+
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+
+
+     <div class="text-center">
+
+                {% if messages %}
+
+                      {% for message in messages %}
+
+                         <h6 style="color: red; margin-top: 30px"> {{ message }}</h6>
+
+                      {% endfor %}
+
+                {%  endif %}
+
+     </div>
+
+
+    {% comment %}<div class="text-center" id="interview-form" style="display: none">
+
+
+        {% if not status %}
+
+            <div class="interview-form" style="margin-top: 10px">
+
+
+
+                     <form method="post" >
+
+                     {%  csrf_token %}
+
+            <div class="text-center"> <h2> Interview Form </h2></div>
+
+                <div class="row">
+
+            {% for field in form %}
+
+                {% if field.label == 'Interview date' %}
+
+                    <div class="col-md-4">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <input  name="{{ field.name }}" id="interview-date" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                       </input>
+
+                     </div>
+                {% else %}
+
+                    <div class="col-md-8">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <textarea  name="{{ field.name }}" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                      </textarea>
+                    </div>
+
+                {% endif %}
+
+
+            {% endfor %}
+
+                </div>
+
+                <a href="{% url 'send_interview_call' %}">
+                    <button class="btn btn-info" style="margin-top: 20px"> SEND INTERVIEW CALL </button>
+                </a>
+
+
+        </form>
+
+            </div>
+
+
+        {% else %}
+
+            <div class="text-center"> <h2> You have already sent interview invite  </h2></div>
+
+            <div class="row">
+
+            {% for field in form %}
+
+                {% if field.label == 'Interview date' %}
+
+                    <div class="col-md-4">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <input  name="{{ field.name }}" id="interview-date" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                       </input>
+
+                     </div>
+                {% else %}
+
+                    <div class="col-md-8">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <textarea  name="{{ field.name }}" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                      </textarea>
+                    </div>
+
+                {% endif %}
+
+
+            {% endfor %}
+
+                </div>
+
+        {% endif %}
+
+    </div>{% endcomment %}
+
+
+    <div  style="margin-top: 40px">
+
+        {%  if seeker and application %}
+
+            <div class="text-center">
+
+                <h2> Applicant Details </h2>
+
+            </div>
+
+
+            <table class="table table-dark">
+
+                <tbody>
+
+                    <tr>
+                          <th scope="row"> Application Status  </th>
+                          <td>
+                              {%  if application.status == 'A' %}
+                                  ACTIVE APPLICATION
+                                  <span style="margin-left: 300px">
+                                  <a href="{% url 'accept_applicant' application.id %}">
+                                    <button class="btn-sm btn-info" style="margin-right: 20px">
+                                    ACCEPT APPLICATION
+                                    </button>
+                                  </a>
+                                  <a href="{% url 'reject_applicant' application.id %}">
+                                    <button class="btn-sm btn-danger">REJECT APPLICATION</button>
+                                  </a>
+                                  {% elif application.status == 'S' %}
+                                  APPLICANT SELECTED
+                                  <span style="margin-left: 300px">
+                                  <a href="{% url 'send_interview_call' application.id %}">
+                                      <button class="btn-sm btn-info" id="interview-button" style="margin-right: 20px">
+                                      SEND INTERVIEW CALL </button>
+                                  </a>
+                                  <a href="{% url 'reject_applicant' application.id %}">
+                                    <button class="btn-sm btn-danger">REJECT APPLICATION</button>
+                                  </a> </span>
+                                  {% elif application.status == 'I' %}
+                                  <span style="margin-left: 300px">
+                                  <button style="margin-right: 20px" class="btn-sm btn-success">
+                                      INTERVIEW INVITE SENT </button>
+                                   </span>
+                                  {% else %} APPLICANT REJECTED
+                                  <span style="margin-left: 300px">
+                                    <a href="{% url 'accept_applicant' application.id %}">
+                                    <button class="btn-sm btn-warning" style="margin-right: 20px">
+                                        RE-ACCEPT APPLICATION
+                                    </button>
+                                  </a>
+                                  {% endif %}
+                                  </span>
+
+
+                              </td>
+
+                     </tr>
+                     <tr>
+                          <th scope="row"> First Name  </th>
+                          <td>{{ seeker.first_name }}</td>
+
+                     </tr>
+                    <tr>
+                          <th scope="row"> Last Name  </th>
+                          <td>{{ seeker.last_name }}</td>
+
+                     </tr>
+                     <tr>
+                          <th scope="row"> Matching Score </th>
+                          <td>{{ application.matching_score }}</td>
+
+                     </tr>
+                     <tr>
+                          <th scope="row"> Cover Letter</th>
+                          <td>{{ application.cover_letter }}</td>
+
+                     </tr>
+                     <tr>
+                          <th scope="row"> CV </th>
+                          <td>{{ application.cv }}</td>
+
+                     </tr>
+                    <tr>
+                          <th scope="row"> Gender  </th>
+                          <td>{% if seeker.gender == 'M' %} Male {% else %} Female {% endif %}</td>
+
+                     </tr>
+                    <tr>
+                          <th scope="row"> Address  </th>
+                          <td>{{ seeker.address }}</td>
+
+                     </tr>
+                    <tr>
+                          <th scope="row"> Phone  </th>
+                          <td>{{ seeker.phone }}</td>
+
+                     </tr>
+                    <tr>
+                          <th scope="row"> Current Job </th>
+                          <td>{{ seeker.current_job_role }}</td>
+
+                     </tr>
+                    <tr>
+                          <th scope="row"> Current Company </th>
+                          <td>{{ seeker.current_company }}</td>
+
+                     </tr>
+
+                </tbody>
+            </table>
+
+
+        {%  endif %}
+
+
+    </div>
+
+
+
+
+
+    </div>
+
+
+{% endblock %}

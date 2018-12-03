@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{%  block content %}
+
+    <div class="container form-group">
+
+    <div class="row">
+
+        <div class="col-lg-6">
+        <h2> ADD A NEW ENTRY </h2>
+        </div>
+
+    <div class="col-lg-6">
+        <a href="{% url 'index' %}"> <button class="btn btn-dark"> Go back </button> </a>
+    </div>
+
+    </div>
+
+
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {%  for  field in form %}
+            <label> {{ field.label }}</label>
+            <input placeholder="{{ field.label }}" name="{{ field.name }}" class="form-control">
+            {{ field.errors }}
+
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success"> Submit </button>
+    </form>
+
+
+
+    </div>
+
+
+{% endblock content %}

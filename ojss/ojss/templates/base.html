@@ -1,0 +1,374 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="{% static  'ojss_app/css/bootstrap.css' %}"/>
+    <link rel="stylesheet" href="{% static  'ojss_app/css/main.css' %}"/>
+  <title>OJSS</title>
+</head>
+<body>
+
+{% if request.user.is_seeker or request.user == None %}
+
+     <!---  Base Page for seeker -->
+
+<div class="container" >
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+
+            <nav class="navbar navbar-dark navbar-expand-md bg-dark">
+
+        <a class="navbar-brand mx-5" href="{% url 'search' %}" style="font-size:40px" > OJSS </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" style="float:right"
+                    data-target="#myToggleNav" aria-controls="myTogglerNav" aria-label="Toggle Navigation" aria-expanded="false">
+                  <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse clearfix" id="myTogglerNav">
+
+            <div class="navbar-nav mx-auto" style="font-size: 20px">
+
+                    <a class="navbar-item nav-link" href="{% url 'my_applications' %}"> Applied Jobs </a>
+                    <a class="navbar-item nav-link" href="{% url 'skills' %}">Skills</a>
+                    <a class="navbar-item nav-link" href="{% url 'seeker_profile' %}"> Profile </a>
+                    <a class="navbar-item nav-link" href="{% url 'logout' %}"> Logout </a>
+
+            </div> <!-- end of navbar nav -->
+
+
+        </div> <!-- end of the nav items -->
+
+
+            </nav>  <!-- end of navbar -->
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    {% else %}
+
+
+
+
+    <!---  Base Page for recruiter -->
+
+    <div class="container" >
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+
+            <nav class="navbar navbar-dark navbar-expand-md bg-dark">
+
+        <a class="navbar-brand mx-5" href="{% url 'search' %}" style="font-size:40px" > OJSS </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" style="float:right"
+                    data-target="#myToggleNav" aria-controls="myTogglerNav" aria-label="Toggle Navigation" aria-expanded="false">
+                  <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse clearfix" id="myTogglerNav">
+
+            <div class="navbar-nav mx-auto" style="font-size: 20px">
+
+                    <a class="navbar-item nav-link" href="{%  url 'manage_jobs' %}"> Manage Jobs </a>
+                    <a class="navbar-item nav-link" href="{% url 'recruiter_profile' %}"> Profile </a>
+                    <a class="navbar-item nav-link" href="{% url 'logout' %}"> Logout </a>
+
+            </div> <!-- end of navbar nav -->
+
+
+        </div> <!-- end of the nav items -->
+
+
+            </nav>  <!-- end of navbar -->
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    </div>
+
+{% endif %}
+
+
+
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <label class="label form-control" for="searchText" style="background-color: transparent;
+                color: #ffffff; font-size: 15px"> Search Keywords </label>
+
+            </div>
+
+
+             <div class="col-md-2">
+
+                <label class="label form-control" for="searchCategory" style="background-color: transparent;
+                color: #ffffff;font-size: 15px"> Search by </label>
+
+            </div>
+
+
+            <div class="col-md-2">
+
+                <label class="label form-control" for="searchCategory" style="background-color: transparent;
+                color: #ffffff;font-size: 15px"> Category </label>
+
+            </div>
+
+
+            <div class="col-md-2">
+
+                <label class="label form-control" for="searchCategory" style="background-color: transparent;
+                color: #ffffff;font-size: 15px"> Sub Category </label>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <form  name="searchForm" type="get" action="{% url 'search_list' %}" style="margin-top: -35px">
+
+
+            <div class="form-row">
+
+                    <div class="form-group col-md-3" >
+
+
+                        <input name="keyword" class="form-control" type="text" placeholder="Search" style="background-color: #1a1a1a;
+                                            color:#ffffff" id="searchText">
+
+
+                    </div>
+
+
+
+                    <div class="form-group col-md-2">
+
+                        <select class="form-control" name="search_by" style="margin-top: 20px; background-color: #1a1a1a;
+                                            color:#ffffff" id="searchCategory">
+
+                            <option value="1">By Job Role</option>
+                            <option value="2"> By Location</option>
+                            <option value="3"> By Remuneration</option>
+
+                        </select>
+
+
+                    </div>
+
+                    <div class="form-group col-md-2">
+
+                        <select class="form-control" name="category" style="margin-top: 20px; background-color: #1a1a1a;
+                                      color:#ffffff" data-url = "{% url 'category' %}"  id="category">
+
+                            <option value="1">IT</option>
+
+
+                        </select>
+
+
+                    </div>
+
+                    <div class="form-group col-md-2">
+
+                        <select class="form-control" name="subcategory" style="margin-top: 20px; background-color: #1a1a1a;
+                                            color:#ffffff" data-subcategory-url = "{% url 'subcategory' %}"  id="subcategory">
+
+                            <option value="1">Software Development</option>
+                            <option value="2">Network</option>
+                            <option value="3">Database Development</option>
+                            <option value="4">Security</option>
+                            <option value="5">System Administration</option>
+
+                        </select>
+
+
+                    </div>
+
+
+
+                    <div class="form-group col-md-2">
+
+                        <button class="btn btn-success form-control" type="submit" style="margin-top: 20px"> Search </button>
+
+
+                    </div>
+
+
+
+            </div>
+
+
+
+
+
+
+        </form>
+
+
+
+
+
+
+
+
+    </div>
+
+
+     <div class="row border">
+
+     </div>
+
+
+
+
+
+
+    {%  block content %}
+    {%  endblock content %}
+
+</body>
+<script src="{%  static 'ojss_app/js/script.js' %}"> </script>
+<script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+    //code to generate date pickers
+     $( function() {
+    $( "#datepicker" ).datepicker({
+
+        dateFormat : 'yy-mm-dd'
+    });
+  } );
+
+
+     $("#deadline").datepicker({
+      autoclose: true,
+      todayHighlight: true,
+         dateFormat : 'yy-mm-dd',
+      minDate : 0,
+ });
+
+
+      $("#interview-date").datepicker({
+      autoclose: true,
+      todayHighlight: true,
+         dateFormat : 'yy-mm-dd',
+      minDate : 0,
+ });
+
+
+    $(document).ready(function(){
+
+        var url = $('#category').attr("data-url");
+
+        $.ajax({
+
+           url : url,
+            success: function d(data) {
+
+               $('#category').html(data);
+            }
+
+
+        });
+
+    });
+
+
+
+
+
+ $(category).change(function () {
+
+    var url = $("#subcategory").attr("data-subcategory-url");
+
+
+
+    var category = $(this).val();
+
+
+    $.ajax({
+
+        url : url,
+        data : {
+
+            'category' : category
+        },
+        success : function d(data) {
+
+            $('#subcategory').html(data);
+        }
+    });
+
+});
+
+
+
+
+
+
+
+
+// job create drop down list loader
+
+$(id_category).change(function () {
+
+    var url = $("#jobform").attr("data-subcategory-url");
+
+
+    var category = $(this).val();
+
+
+    $.ajax({
+
+        url : url,
+        data : {
+
+            'category' : category
+        },
+        success : function d(data) {
+
+            $('#id_sub_category').html(data);
+        }
+    });
+
+});
+
+
+
+
+
+
+</script>
+
+</html>

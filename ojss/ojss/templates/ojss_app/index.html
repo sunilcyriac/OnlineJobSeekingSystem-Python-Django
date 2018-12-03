@@ -1,0 +1,45 @@
+
+{%  extends "base.html" %}
+
+{% block content %}
+
+
+    {%  if request.user.is_seeker %}
+
+
+
+       {% include 'ojss_app/_job_item.html' %}
+
+
+    {% else %}
+
+
+                {% if messages %}
+
+                      {% for message in messages %}
+
+                          {% if message.tags == 'success' %}
+                          <div class="text-center" id="messages">
+                          <p style="color:#0d0d0d; height: 30px; font-size: 15px"   > {{ message }}</p>
+                          </div>
+                           {% endif %}
+                      {% endfor %}
+
+                {%  endif %}
+
+
+        <div style="margin-top: 20px">
+
+              {% include 'ojss_app/_job_item.html' %}
+
+        </div>
+
+
+
+
+    {% endif %}
+
+
+
+
+{%  endblock content %}

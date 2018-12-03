@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="{% static  'ojss_app/css/bootstrap.css' %}"/>
+    <link rel="stylesheet" href="{% static  'ojss_app/css/main.css' %}"/>
+    <style>
+       body {
+
+            background: url("{% static 'ojss_app/images/bg.jpg' %}");
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+
+        }
+    </style>
+  <title>OJSS</title>
+</head>
+<body>
+
+
+{%  block content %}
+
+
+{% endblock %}
+
+</body>

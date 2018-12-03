@@ -1,0 +1,109 @@
+<div class="container">
+
+    {% if results %}
+
+        {% for item in results %}
+
+        <div class="job_list">
+
+
+        <div class="row">
+        <div class="col-md-12">
+
+            <h2> {{ item.job_role }} </h2>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <h4> Organization :{{ item.organization }}</h4>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <h6> Location : {{ item.location }}</h6>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+             <h6> Renumeration : {{ item.remuneration }} </h6>
+
+        </div>
+
+    </div>
+
+            <div class="row">
+        <div class="col-md-12">
+
+             <h6> Deadline : {{ item.deadline }} </h6>
+
+        </div>
+
+    </div>
+
+
+
+        <div class="border-job"> </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <p> {{ item.job_description|slice:":255"  }}</p>
+
+        </div>
+
+
+    </div>
+
+
+        <a href="{% url 'job_details'   item.id  %}">
+
+            <button class="btn bg-warning clearfix apply-button"  style="float: right"> Details </button>
+
+        </a>
+
+
+    </div>
+
+    {% endfor %}
+
+        {% else %}
+
+
+         <div class="text-center page-center" style="border: none; width: auto">
+
+                {% if messages %}
+
+                      {% for message in messages %}
+
+
+                         <h1 style="color: red; margin-top: 30px"> {{ message }}</h1>
+
+
+
+                      {% endfor %}
+
+                {%  endif %}
+
+            </div>
+
+
+
+    {% endif %}
+
+
+
+
+    </div>

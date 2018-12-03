@@ -1,0 +1,102 @@
+
+{%  extends "base.html" %}
+
+{% block content %}
+
+<div class="text-center" id="interview-form" style="display: none">
+
+
+        {% if not status %}
+
+            <div class="interview-form" style="margin-top: 10px">
+
+
+
+                     <form method="post" >
+
+                     {%  csrf_token %}
+
+            <div class="text-center"> <h2> Interview Form </h2></div>
+
+                <div class="row">
+
+            {% for field in form %}
+
+                {% if field.label == 'Interview date' %}
+
+                    <div class="col-md-4">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <input  name="{{ field.name }}" id="interview-date" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                       </input>
+
+                     </div>
+                {% else %}
+
+                    <div class="col-md-8">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <textarea  name="{{ field.name }}" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                      </textarea>
+                    </div>
+
+                {% endif %}
+
+
+            {% endfor %}
+
+                </div>
+
+                <a href="{% url 'send_interview_call' %}">
+                    <button class="btn btn-info" style="margin-top: 20px"> SEND INTERVIEW CALL </button>
+                </a>
+
+
+        </form>
+
+            </div>
+
+
+        {% else %}
+
+            <div class="text-center"> <h2> You have already sent interview invite  </h2></div>
+
+            <div class="row">
+
+            {% for field in form %}
+
+                {% if field.label == 'Interview date' %}
+
+                    <div class="col-md-4">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <input  name="{{ field.name }}" id="interview-date" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                       </input>
+
+                     </div>
+                {% else %}
+
+                    <div class="col-md-8">
+
+                     <label for="{{ field.name }}">{{field.label}}</label>
+                      <textarea  name="{{ field.name }}" class="form-control input-control"
+                       style="background-color: #1a1a1a; color: #ffffff">
+                      </textarea>
+                    </div>
+
+                {% endif %}
+
+
+            {% endfor %}
+
+                </div>
+
+        {% endif %}
+
+    </div>
+
+
+{% endblock %}
